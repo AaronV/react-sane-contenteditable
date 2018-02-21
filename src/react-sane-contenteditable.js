@@ -116,6 +116,16 @@ class ContentEditable extends Component {
     if (maxLength && !ev.metaKey && ev.which !== 8 && value.replace(/\s\s/g, ' ').length >= maxLength) {
       ev.preventDefault();
     }
+
+    if (this.props.onKeyDown) {
+      this.props.onKeyDown(ev);
+    }
+  }
+
+  _onKeyUp = (ev) => {
+    if (this.props.onKeyUp) {
+      this.props.onKeyUp(ev);
+    }
   }
 
   render() {
@@ -131,6 +141,7 @@ class ContentEditable extends Component {
         onBlur={this._onBlur}
         onInput={this._onChange}
         onKeyDown={this._onKeyDown}
+        onKeyUp={this._onKeyUp}
         onPaste={this._onPaste}
       />
     );
